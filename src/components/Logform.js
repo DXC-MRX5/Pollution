@@ -21,6 +21,7 @@ const Logform = () => {
                 const token = response.data.Token;
                 if(token){
                     localStorage.setItem('receivedToken', token);
+                    navigate('/grivance');
                 }
             })
         }
