@@ -8,6 +8,7 @@ const Grivance = () => {
   const [arrow3, setArrow3]=useState(false);
   const [arrow4, setArrow4]=useState(false);
   const [showFrom, setShowForm]=useState(false);
+  const [showMsg, setShowMsg]=useState(false);
   const handleDownFirst=()=>{
     setArrow1(!arrow1);
     setArrow2(false);
@@ -33,11 +34,19 @@ const Grivance = () => {
     setArrow3(false);
   }
   const handleShowForm=()=>{
-    setShowForm(!showFrom);
+    setShowForm(true);
     setArrow1(false);
     setArrow2(false);
     setArrow3(false);
     setArrow4(false);
+  }
+  const hideForm=()=>{
+    setShowForm(false);
+    setShowMsg(false);
+  }
+  const handleMsg=()=>{
+    setShowMsg(true);
+    setShowForm(false);
   }
   return (
     <div>
@@ -50,7 +59,7 @@ const Grivance = () => {
           </div> : <div className='btnDiv'><button onClick={handleDownFirst}>Sewage Waste  <AiFillCaretDown/></button></div>}
           {arrow2 ? <div className='btnDiv'>
             <button onClick={handleDownSec}>Plastic Related<AiFillCaretUp/></button>
-            <button onClick={handleDownSec}>Above 120 Micron</button>
+            <button onClick={()=>alert('It is OK to use Plastic above 120 Micron !')}>Above 120 Micron</button>
             <button onClick={handleShowForm}>Below 120 Micron</button>
           </div> : <div className='btnDiv'><button onClick={handleDownSec}>Plastic Related<AiFillCaretDown/></button></div>}
           {arrow3 ? <div className='btnDiv'>
@@ -58,7 +67,7 @@ const Grivance = () => {
             <button onClick={handleShowForm}>Open Defecation</button>
             <button onClick={handleShowForm}>Throwing Garbage</button>
           </div> : <div className='btnDiv'><button onClick={handleDownThd}>Ganga Pollution<AiFillCaretDown/></button></div>}
-          <button>Septic Tank & Vat</button>
+          <button onClick={handleMsg}>Septic Tank & Vat</button>
           {arrow4 ? <div className='btnDiv'>
             <button onClick={handleDownFrt}>ODF<AiFillCaretUp/></button>
             <button onClick={handleDownFrt}>Guidelines</button>
@@ -67,7 +76,11 @@ const Grivance = () => {
         <div className='Container'>
         {showFrom ? <div className='cmpln-Cntnr'>
           <ComplainForm/>
-          <button onClick={handleShowForm} className='backBtn'>Back</button>
+          <button onClick={hideForm} className='backBtn'>Back</button>
+        </div> : null}
+        {showMsg ? <div className='msgBox'>
+          <h2>Please contact with the Municipality !</h2>
+          <button onClick={hideForm} className='backBtn'>OK</button>
         </div> : null}
         </div>
     </div>
